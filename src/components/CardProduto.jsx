@@ -14,7 +14,7 @@ const CardProduto = (props) => {
           {/* Subtitulo no card com preco do produto */}
           <Card.Subtitle className="mb-2 text-muted">
             Preço: {props.preco}
-          </Card.Subtitle>
+          </Card.Subtitle> 
           <Card.Text>
             <b> Descrição: </b> <br></br> {props.descricao}
           </Card.Text>

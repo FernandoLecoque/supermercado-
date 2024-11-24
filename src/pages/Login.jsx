@@ -8,7 +8,7 @@ import Alert from "react-bootstrap/Alert";
 // Importando o hook useState para monitorar a mudança das variáveis
 import { useState } from "react";
 
-//Importação do navigate useState para monitorar a mudança das variáveis
+//Importação do navigate pra transitar entre páginas
 import { useNavigate} from "react-router-dom";
 
 const Login = () => {
@@ -21,51 +21,59 @@ const Login = () => {
   const [alertMensagem, setAlertMensagem] = useState("");
   const [alertVariant, setAlertVariant] = useState("danger");
 
-  // Lista de usuario
+  //Lista com usuarios
   const usuarios = [
-    { id: 1, name: "Fulano", email: "fulano@hotmail.com", senha: "123" },
-    { id: 2, name: "Ciclano", email: "ciclano@gmail.com", senha: "456" },
-  ];
+    { id: 1, nome: "Gregory", email:"gregory@gmail.com", senha:"1" },
+    { id: 2, nome: "Cristiano", email:"cristiano@gmail.com", senha:"7" },
+  ]
 
-   // Criando o navigate
+  // Criando o navigate
   const navigate = useNavigate()
 
-     // função para guardar na memoria do navegador as informações do usuario
-  const gravarLocalStorage = (usuario) => {
-    localStorage.setItem("usuario", usuario.nome);
-    localStorage.setItem("email", usuario.email);
+  // Função pra guardar na memória do navegador as informações do usuário
+  const gravarLocalStorage = (usuario) =>{
+    localStorage.setItem("userName", usuario.nome)
+    localStorage.setItem("email", usuario.email)
   }
 
-  // Função para tratar os dados de login
+  //Função pra tratar os dados de login
   const handleLogin = async (e) => {
-    //Previne a página de ser recarregada :)
+    //Previne a página de ser recarregada
     e.preventDefault();
 
-    // Verifica se há aquele usuário digitados na lista
-    const userTofind = usuarios.find(
-      (user) => user.email == email
+    // Verifica se há aquele usuário digitados na lista 
+    const userToFind = usuarios.find(
+      (user)=>user.email == email
     )
-
     if (email != "") {
       if (senha != "") {
-        if (userTofind != undefined & userTofind.senha == senha) {
-          gravarLocalStorage(userTofind)
-          setAlertClass("mb-3 mt-2")
-          setAlertMensagem("Login realizado com sucesso!")
+        if(userToFind != undefined && userToFind.senha == senha){
+          gravarLocalStorage(userToFind)
+          setAlertClass("mb-3 mt-2");
           setAlertVariant("success")
-          navigate("/home") 
+          setAlertMensagem("Login efetuado com sucesso");
+          alert("Login efetuado com sucesso")
+          navigate("/home")
         }
-      } else {
+        else{
+          setAlertClass("mb-3 mt-2");
+          setAlertMensagem("Usuário ou senha inválidos");
+        }
+      } 
+      else {
         setAlertClass("mb-3 mt-2");
-        setAlertMensagem("Preencha o campo de e-mail");
-        setAlertVariant("danger");
+        setAlertMensagem("O campo senha não pode ser vazio");
       }
+    } 
+    else {
+      setAlertClass("mb-3 mt-2");
+      setAlertMensagem("O campo email não pode ser vazio");
     }
-  }
+  };
   return (
     <div>
       <Container
-        style={{ background: "gray", height: "100vh" }}
+        style={{ height: "100vh" }}
         className="justify-content-center align-content-center"
       >
         {/* Icone de login */}
@@ -75,10 +83,13 @@ const Login = () => {
         >
           login
         </span>
-
-        <form style={{ width: "75%", margin: "auto" }} onSubmit={handleLogin} >
+        <Form style={{ width: "75%", margin: "auto" }} onSubmit={handleLogin}>
           {/* Caixinha de email */}
-          <FloatingLabel controlId="floatingInput" label="Email" className="mb-3">
+          <FloatingLabel
+            controlId="floatingInput"
+            label="Email"
+            className="mb-3"
+          >
             <Form.Control
               type="email"
               placeholder="name@example.com"
@@ -107,10 +118,10 @@ const Login = () => {
           </Alert>
 
           {/* Botao pra enviar o formulário */}
-          <Button variant="light" type="submite" className="mt-4" size="lg">
+          <Button variant="light" type="submit" className="mt-4" size="lg">
             Login
           </Button>
-        </form>
+        </Form>
       </Container>
     </div>
   );
