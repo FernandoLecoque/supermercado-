@@ -18,7 +18,7 @@ const NavBarra = () => {
             store
           </span>
           {/* Texto logo */}
-          <Navbar.Brand href="/home">C&G Mercados</Navbar.Brand>
+          <Navbar.Brand href="/home"> C&G Mercados </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="minha-nav" />
           <Navbar.Collapse id="minha-nav">

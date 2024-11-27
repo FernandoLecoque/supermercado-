@@ -35,12 +35,20 @@
       "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAiGeCC3KhBPz8xa_dcPdPor2D__CuueBzeA&s"
     },
     {
-      "id": "2",
-      "nome": "Dolly Guaraná",
-      "descricao": "O sabor brasileiro",
-      "preco": 0.99,
-      "categoria": "Alimentos",
-      "imagemUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZBZMRU96Mx3KWq03iGSKYCtlF5ZfrTQr0fw&s"
+      "id": "a476",
+      "nome": "Bio",
+      "descricao": "Abre apetite",
+      "categoria": "Alimentos e Bebidas",
+      "preco": "7",
+      "imagemUrl": "https://www.mundoboaforma.com.br/wp-content/uploads/2014/11/biotonico-fontoura-capa.jpg"
+    },
+    {
+      "id": "641c",
+      "nome": "Biozin",
+      "descricao": "Abre apetite",
+      "categoria": "Saúde e Beleza",
+      "preco": "7",
+      "imagemUrl": "https://www.mundoboaforma.com.br/wp-content/uploads/2014/11/biotonico-fontoura-capa.jpg"
     }
   ],
   "categorias": [

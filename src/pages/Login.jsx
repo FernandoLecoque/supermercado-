@@ -15,6 +15,10 @@ import { useNavigate} from "react-router-dom";
 const url = "http://localhost:5000/usuarios"
 
 const Login = () => {
+  //Resetar localstorage
+  localStorage.removeItem("userName")
+  localStorage.removeItem("email")
+  
   //Variáveis pra guardar as informações digitadas pelo usuário
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -89,7 +93,7 @@ const Login = () => {
   return (
     <div>
       <Container
-        style={{ height: "100vh", background: "baby-blue"}}
+        style={{ height: "100vh" }}
         className="justify-content-center align-content-center"
       >
         {/* Icone de login */}
