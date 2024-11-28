@@ -19,25 +19,24 @@ import { useNavigate } from "react-router-dom";
 
 // Url da api
 const urlCate = "http://localhost:5000/categorias";
-const urlProd = "http://localhost:5000/produtos";
 
-const CadastroProduto = () => {
-  //Lista com categorias
-  const [categorias, setCategorias] = useState([]);
-  //UseEffect pra puxar os dados da api
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const req = await fetch(urlCate);
-        const cate = await req.json();
-        console.log(cate);
-        setCategorias(cate);
-      } catch (erro) {
-        console.log(erro.message);
-      }
+const EditarProduto = () => {
+//Lista com categorias
+const [categorias, setCategorias] = useState([]);
+//UseEffect pra puxar os dados da api
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const req = await fetch(urlCate);
+      const cate = await req.json();
+      console.log(cate);
+      setCategorias(cate);
+    } catch (erro) {
+      console.log(erro.message);
     }
-    fetchData();
-  }, []);
+  }
+  fetchData();
+}, []);
 
   //Link produto sem imagem
   const linkImagem =
@@ -58,7 +57,32 @@ const CadastroProduto = () => {
   // Criando o navigate
   const navigate = useNavigate();
 
-  //Função pra lidar com recarregamento da página
+  // Código para pegar url atual, jogar em um array, e pedar o ultimo elemento 
+  const params = window.location.pathname.split("/")
+  const idProd = params[params.length - 1]
+
+  //Buscar as informações do produto
+  useEffect(() => {
+    async function fetchData() {
+      try{
+        const req = await fetch(`http://localhost:5000/produtos/${idProd}`)
+        const prod = await req.json()
+        console.log(prod)
+        setNome(prod.nome)
+        setDescricao(prod.descricao)
+        setCategoria(prod.categoria)
+        setPreco(prod.preco)
+        setImagemUrl(prod.imagemUrl == "" ? "" : prod.imagemUrl)
+      } 
+      catch(error){
+        console.log(error.message)
+      }
+    }
+    fetchData()
+  })
+
+
+  //Função pra lidar com o envio dos dados
   const handleSubmit = async (e) => {
     //Previne a página de ser recarregada
     e.preventDefault();
@@ -69,8 +93,8 @@ const CadastroProduto = () => {
           const produto = { nome, descricao, categoria, preco, imagemUrl };
           console.log(produto);
           try {
-            const req = await fetch(urlProd, {
-              method: "POST",
+            const req = await fetch(`http://localhost:5000/produtos/${idProd}`, {
+              method: "PUT",
               headers: { "Content-type": "application/json" },
               body: JSON.stringify(produto),
             });
@@ -100,11 +124,12 @@ const CadastroProduto = () => {
     }
   };
 
+
   return (
     <div>
       <NavBarra />
       <Container>
-        <h1>Cadastrar Produtos</h1>
+        <h1>Editar Produtos</h1>
         <form className="mt-3" onSubmit={handleSubmit}>
           <Row>
             <Col xs={6}>
@@ -209,7 +234,7 @@ const CadastroProduto = () => {
 
           {/* Botão para enviar o formulário de cadastro de produto */}
           <Button variant="primary" size="lg" type="submit">
-            Cadastrar
+            Editar
           </Button>
         </form>
       </Container>
@@ -217,4 +242,4 @@ const CadastroProduto = () => {
   );
 };
 
-export default CadastroProduto;
+export default EditarProduto;

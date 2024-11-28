@@ -4,13 +4,12 @@ import Card from "react-bootstrap/Card";
 const CardProduto = (props) => {
   // Funcao pra deletar um produto
   const handleDelete = async (e) => {
-    const req = await fetch(`http://localhost:5000/produtos/${props.id}`, 
-    {
-      method:"DELETE"
+    const req = await fetch(`http://localhost:5000/produtos/${props.id}`, {
+      method: "DELETE",
     });
-    const res = await req.json()
-    console.log(res)
-    alert(`Produto ${res.nome} removido`)
+    const res = await req.json();
+    console.log(res);
+    alert(`Produto ${res.nome} removido`);
   };
 
   return (
@@ -33,7 +32,7 @@ const CardProduto = (props) => {
             <b> Categoria: </b> <br></br> {props.categoria}
           </Card.Text>
 
-          <Card.Link href="/home">
+          <Card.Link href={`/produto/editar/${props.id}`}>
             <Button variant="warning">Editar</Button>
           </Card.Link>
 
